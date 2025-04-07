@@ -40,9 +40,9 @@ function speakText(text) {
   }, 50);
 
   setTimeout(() => {
-    bot.style.backgroundImage = "url(ring,jpg)";
-    document.querySelector('.stand').style.backgroundImage = "url(ring,jpg)";
-  }, 200);
+    bot.style.backgroundImage = "url(ring.jpg)";
+    document.querySelector('.stand').style.backgroundImage = "url(ring.jpg)";
+  }, 100);
 }
 
 
