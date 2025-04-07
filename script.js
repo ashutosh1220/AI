@@ -56,7 +56,7 @@ async function getAIResponse(userText) {
       },
       body: JSON.stringify({
         model: "command-r",
-        message: userText + "short answer in hindi",
+        message: userText + "short answer in 20 words.",
         temperature: 0.3
       })
     });
