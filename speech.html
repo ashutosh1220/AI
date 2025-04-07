@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+</head>
+<body>
+
+    <script>
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!window.SpeechRecognition) {
+            alert("Your browser does not support Speech Recognition. Use Google Chrome.");
+        }
+
+        let recognition = new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = false;
+        recognition.lang = "en-US";
+
+        let isListeningForCommand = false;
+        let assistantName = "jarvis"; // Change this to your preferred hotword
+
+        function startHotwordDetection() {
+            parent.postMessage({ status: "Waiting for hotword..." }, "*");
+            console.log("🎤 Listening for hotword...");
+
+            recognition.start();
+
+            recognition.onresult = function (event) {
+                let transcript = event.results[event.results.length - 1][0].transcript.trim();
+                console.log("🎧 Heard:", transcript);
+
+                if (!isListeningForCommand && transcript.toLowerCase() === assistantName) {
+                    parent.postMessage({ status: "Activated! Speak your command..." }, "*");
+                    isListeningForCommand = true;
+                    recognition.stop();
+                    startCommandRecognition();
+                }
+            };
+
+            recognition.onerror = function (event) {
+                console.error("Speech Recognition Error:", event.error);
+            };
+
+            recognition.onend = function () {
+                if (!isListeningForCommand) {
+                    console.log("🔄 Restarting Hotword Detection...");
+                    recognition.start();
+                }
+            };
+        }
+
+        function startCommandRecognition() {
+            const commandRecognition = new SpeechRecognition();
+            commandRecognition.lang = "en-US";
+            commandRecognition.interimResults = false;
+
+            commandRecognition.start();
+
+            commandRecognition.onresult = function (event) {
+                let command = event.results[0][0].transcript.trim();
+                console.log("🎙️ Command:", command);
+
+                if (command.toLowerCase() === "what's the time") {
+                    alert("The time is: " + new Date().toLocaleTimeString());
+                } else if (command.toLowerCase() === "open google") {
+                    window.open("https://www.google.com", "_blank");
+                } else {
+                    alert("I didn't understand the command.");
+                }
+
+                isListeningForCommand = false;
+                startHotwordDetection();
+            };
+
+            commandRecognition.onend = function () {
+                isListeningForCommand = false;
+                startHotwordDetection();
+            };
+        }
+
+        window.addEventListener("message", function(event) {
+            if (event.data.action === "restart") {
+                recognition.stop();
+                isListeningForCommand = false;
+                startHotwordDetection();
+            }
+        });
+
+        startHotwordDetection();
+    </script>
+
+</body>
+</html>

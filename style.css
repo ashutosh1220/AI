@@ -1,0 +1,361 @@
+*{
+    padding: 0;
+    margin: 0
+}
+
+.page_container{
+    height: 100vh;
+    max-width: 100vw;
+    background-color:transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page_container .hero{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('ring.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.bot{
+    height: 320px;
+    width: 320px;
+    border: 1px solid transparent;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('ring.jpg');
+    transition: all 1.5s ease-in-out;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.head{
+    height: 25%;
+    width: 30%;
+    background-color: rgb(92, 145, 160);
+    position: absolute;
+    top: 8%;
+    border-top: 1px solid rgb(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgb(255, 255, 255, 0.5);
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+    box-shadow: inset 1px 1px 10px rgba(0, 0, 0, 0.566);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mask{
+    height: 45%;
+    width: 80%;
+    background-color: black;
+    position: relative;
+    border-radius: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: 22%;
+    box-shadow: inset 1px 0px 1px white, inset 1px 0px 1px white, inset -1px 0px 1px white, inset -1px 0px 1px white, inset -1px 0px 1px white;
+    transition: all 0.5s ease;
+    z-index: 1;
+}
+
+.eyes{
+    height: 20%;
+    width: 18%;
+    background-color: rgb(226, 226, 225);
+    border-radius: 50%;
+    /* box-shadow: inset -0.5px -0.5px 0.5px white; */
+    border: 1px solid rgb(58, 55, 55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: inherit;
+    transition: all 0.3s ease-in-out;
+    animation: none;
+}
+
+#left_eye{
+  transition: all 0.3s ease;
+    margin-left: 20%;
+}
+
+#right_eye{
+  transition: all 0.3s ease;
+    margin-right: 20%;
+}
+
+@keyframes blink{
+  
+  0%{
+    height: 30%;
+  }
+  80%{
+    height: 30%;
+  }
+  90%{
+    height: 0px;
+  }
+  100%{
+    height: 30%;
+  }
+}
+
+.pupils{
+    height: 50%;
+    width: 60%;
+    background-color: black;
+    border-radius: 50%;
+    position: inherit;
+    top: 5%;
+}
+
+.antenna{
+    height: 40%;
+    width: 2%;
+    background-color: rgb(92, 145, 160);
+    position: absolute;
+    top: -35%;
+    border-radius: 2px;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.mouth{
+  height: 15%;
+  width: 40%;
+  top: 77%;
+  background-Image: url('speakerNet.jpg');
+  background-size: cover;
+  position: absolute;
+  border: 1px solid black;
+  opacity: 0.8;
+  border-radius: 50%;
+  box-shadow:inset 1px 1px 5px black, inset -1px -1px 5px black;
+}
+
+#left_antenna{
+    left: 50%;
+    transform: rotate(20deg);
+    transform-origin: bottom;
+    box-shadow: -1px -1px 3px ;
+}
+
+#right_antenna{
+    left: 47%;
+    transform: rotate(-20deg);
+    transform-origin: bottom;
+    box-shadow: 1px 1px 3px ;
+}
+
+.ball{
+    height: 20%;
+    width: 300%;
+    background-color: rgba(0, 0, 0, 0.827);
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: all 0.5s ease;
+    background-color: white;
+}
+
+#b1{
+    top: -27%;
+    left: -4px;
+}
+
+#b2{
+    top: -27%;
+    right: 4px;
+}
+
+.body{
+    height: 40%;
+    width: 40%;
+    background-color: rgb(92, 145, 170, 0.9);
+    position: absolute;
+    top: 35%;
+    border-top: 1px solid rgb(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgb(255, 255, 255, 0.5);
+    border-bottom-right-radius: 200px;
+    border-bottom-left-radius: 200px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.onoffbtn{
+    height: 30%;
+    width: 30%;
+    background-size: contain;
+    background-image: url('offcharge.jpg');
+    background-position: center;
+    box-shadow: inset -2px -2px 4px black, inset 2px 2px 4px black, 1px 1px 40px rgb(0, 255, 200), 1px 1px 40px rgb(0, 0, 0);
+    border-radius: 50%;
+    border: 1px solid white;
+    position: absolute;
+    top: 20%;
+    cursor: pointer;
+    animation: none;
+    transition: all 0.1s ease;
+    color: red;
+}
+
+@keyframes rotate{
+
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360000deg);
+    }
+}
+
+
+
+.left_hand, .right_hand{
+    height: 37%;
+    width: 9%;
+    border: 1px solid gray;
+    border-top: 1px solid rgb(255, 255, 255, 0.5);
+    background-color: rgb(92, 145, 170);
+    position: absolute;
+    z-index: 1;
+}
+
+.left_hand{
+    top: 37%;
+    left: 30%;
+    border-bottom-right-radius: 90px;
+    border-top-left-radius:40px;
+    border-top-right-radius: 20px;
+    box-shadow: inset 1px 1px 15px rgba(0, 0, 0, 0.727);
+    border-left: 1px solid rgb(255, 255, 255, 0.5);
+}
+
+.right_hand{
+    top: 37%;
+    right: 30%;
+    border-bottom-left-radius: 90px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 40px;
+    box-shadow: inset -1px -1px 15px rgba(0, 0, 0, 0.727);
+    border-right: 1px solid rgb(255, 255, 255, 0.5);
+}
+
+.stand{
+  height: 30%;
+  width: 70%;
+  background-image: url('ring.jpg');
+  background-size: cover;
+  background-position: top;
+  /*box-shadow: inset -2px -2px 20px red, inset 2px 2px 30px red, inset 1px 1px 60px rgb(255, 0, 0);*/
+  position: relative;
+  top: 35%;
+  border-radius: 50%;
+  transition: all 1.5s ease-in-out;
+  border: 2px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.foot{
+  height: 22%;
+  width: 15%;
+  background-color: rgb(92, 145, 170);
+  border: 1px solid rgb(255, 255, 255, 0.5);
+  position: absolute;
+  border-radius: 50%;
+  top: 20%;
+  box-shadow: inset -1px -1px 15px rgba(0, 0, 0, 0.727);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#f1{
+  left: 30%;
+}
+
+#f2{
+  right: 30%;
+}
+
+.leg{
+  height: 150%;
+  width: 30%;
+  background-color: red;
+  position: relative;
+  top: -90%;
+  border-radius: 100px;
+  border: 1px solid gray;
+  background-color: rgb(92, 145, 170);
+  box-shadow: inset -1px -1px 15px rgba(0, 0, 0, 0.727);
+}
+
+#askbtn{
+  height: 50%;
+  width: 22%;
+  border-radius: 50%;
+  position: relative;
+  top: 50%;
+  cursor: pointer;
+  display: none;
+  border: 4px solid rgba(117, 9, 9, 0.51);
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(240, 248, 255, 0.629);
+}
+
+#wave_video{
+  position: relative;
+}
+
+#l1{
+  transform: rotate(10deg);
+  transform-origin: bottom;
+}
+
+#l2{
+  transform: rotate(-10deg);
+  transform-origin: bottom;
+}
+
+/* Default size for PC */
+.bot {
+  height: 80vh;
+  width: 80vh;
+}
+
+/* Tablet view (width between 600px - 1024px) */
+@media screen and (max-width: 1024px) {
+  .bot {
+      height: 80vh;
+      width: 80vh;
+  }
+}
+
+/* Mobile view (width less than 600px) */
+@media screen and (max-width: 600px) {
+  .bot {
+      height: 80vw;
+      width: 80vw;
+  }
+}
+

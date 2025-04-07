@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice AI Chatbot with Text-to-Speech</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #response { margin-top: 20px; white-space: pre-wrap; }
+    </style>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=CnYn9c0j"></script>
+</head>
+<body>
+    <h2>🎤 Ask AI with Your Voice</h2>
+    <button onclick="startListening()">🎙️ Speak Now</button>
+    <p id="userInput"></p>
+    <pre id="response"></pre>
+
+    <script>
+        const API_URL = "https://api.cohere.com/v1/chat"; 
+        const API_KEY = "ANidsR77Z35GY7x9QtnfxmYGvebFOSnAuO3HgJGM";  // ⚠️ Yaha apni API key paste karo
+
+        // 🎤 Speech Recognition Setup (Speech-to-Text)
+        function startListening() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = "en-US";
+            recognition.start();
+
+            recognition.onresult = async function (event) {
+                const userText = event.results[0][0].transcript;
+                document.getElementById("userInput").innerText = "You: " + userText;
+                getAIResponse(userText);
+            };
+
+            recognition.onerror = function (event) {
+                document.getElementById("response").innerText = "Speech Error: " + event.error;
+                console.error("Speech Error:", event.error);
+            };
+        }
+
+        // 🔥 Call AI API
+        async function getAIResponse(userText) {
+            document.getElementById("response").innerText = "Thinking...";
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: "command-r",
+                        message: userText + " (Give a short answer under 20 words.)",  // 🔥 Short response enforce karne ke liye
+                        temperature: 0.7
+                    })
+                });
+
+                const data = await response.json();
+                if (data.text) {
+                    let shortResponse = data.text.split(" ").slice(0, 20).join(" "); // 🔥 20 words limit
+                    document.getElementById("response").innerText = "AI: " + shortResponse;
+                    speakText(shortResponse);  // Speak the AI's reply using Text-to-Speech
+                } else {
+                    document.getElementById("response").innerText = "Error:\n" + JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                document.getElementById("response").innerText = "API Error: " + error.message;
+                console.error("API Error:", error);
+            }
+        }
+
+        // 🔊 Text-to-Speech (AI Response Speaking)
+        function speakText(text) {
+            responsiveVoice.speak(text, "Hindi Male", {pitch: 1.1});
+        }
+    </script>
+</body>
+</html>

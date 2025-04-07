@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>AI</title>
+</head>
+<body>
+    <div class="page_container">
+        <div class="hero">
+            <div class="bot">
+                <div class="head">
+                    <div class="antenna" id="left_antenna">
+                        <div class="ball" id="b1" ></div>
+                    </div>
+                    <div class="antenna" id="right_antenna">
+                        <div class="ball" id="b2"></div>
+                    </div>
+                    <div class="mask">
+                        <div class="eyes" id="left_eye">
+                            <div class="pupils"></div>
+                        </div>
+                        <div class="eyes" id="right_eye">
+                            <div class="pupils"></div>
+                        </div>
+                    </div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="left_hand"></div>
+                <div class="body">
+                    <button class="onoffbtn" id="onoffbtn"></button>
+                </div>
+                <div class="right_hand"></div>
+                <div class="stand">
+                  <div class="foot" id="f1">
+                    <div class="leg" id="l1"></div>
+                  </div>
+                  <div class="foot" id="f2">
+                    <div class="leg" id="l2"></div>
+                  </div>
+
+                  <button id="askbtn">
+                    <img src="mic-fill.svg" alt="" height="60%" class="micicon">
+                  </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="mainn.js"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=CnYn9c0j"></script>
+</body>
+</html>

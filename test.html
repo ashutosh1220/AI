@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Voice Assistant</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        h1 { color: #333; }
+        #status { font-weight: bold; color: green; }
+    </style>
+</head>
+<body>
+
+    <h1>Voice Assistant</h1>
+    <p>Status: <span id="status">Waiting for hotword...</span></p>
+    <button onclick="startHotwordDetection()">Restart Listening</button>
+
+    <script>
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!window.SpeechRecognition) {
+            alert("Your browser does not support Speech Recognition. Use Google Chrome.");
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.continuous = true;  
+        recognition.interimResults = false; 
+        recognition.lang = "en-US";  
+
+        let isListening = false;  
+        let assistantName = "jarvis"; // Change this to any name
+
+        // 🔹 Assistant ka naam suno
+        recognition.onresult = function (event) {
+            let transcript = event.results[event.results.length - 1][0].transcript.trim();
+            console.log("Heard:", transcript);
+
+            if (!isListening && transcript.toLowerCase() === assistantName) {
+                document.getElementById("status").innerText = "Activated! Speak your command...";
+                isListening = true;
+                startCommandRecognition();
+            }
+        };
+
+        // 🔹 Background me hotword suno
+        function startHotwordDetection() {
+            document.getElementById("status").innerText = "Waiting for hotword...";
+            console.log("🎤 Listening for hotword...");
+            recognition.start();
+        }
+
+        // 🔹 Hotword milne ke baad command recognition start karo
+        function startCommandRecognition() {
+            const commandRecognition = new SpeechRecognition();
+            commandRecognition.lang = "en-US";
+            commandRecognition.interimResults = false;
+            
+            commandRecognition.onresult = function (event) {
+                let command = event.results[0][0].transcript.trim();
+                console.log("Command:", command);
+                isListening = false;  
+
+                // 🔹 Execute commands
+                if (command.toLowerCase() === "what's the time") {
+                    alert("The time is: " + new Date().toLocaleTimeString());
+                } else if (command.toLowerCase() === "open google") {
+                    window.open("https://www.google.com", "_blank");
+                } else {
+                    alert("I didn't understand the command.");
+                }
+
+                startHotwordDetection();
+            };
+
+            commandRecognition.start();
+        }
+
+        // 🎯 Start hotword detection when page loads
+        startHotwordDetection();
+    </script>
+
+</body>
+</html>
